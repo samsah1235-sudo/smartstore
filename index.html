@@ -11,26 +11,94 @@ body {
   text-align: center;
 }
 .container {
-  margin-top: 100px;
+  margin-top: 30px;
+}
+.card {
+  background: #1e293b;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 10px;
 }
 button {
   background: #22c55e;
   border: none;
-  padding: 15px 25px;
+  padding: 10px 20px;
   color: white;
-  font-size: 18px;
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: 8px;
+}
+input, select {
+  padding: 10px;
+  margin: 5px;
+  width: 80%;
 }
 </style>
 </head>
 <body>
 
+<h1>🎮 Smart Store</h1>
+
 <div class="container">
-  <h1>🎮 Smart Store</h1>
-  <p>شحن ألعاب - فري فاير / لودو</p>
-  <button onclick="alert('تم الطلب!')">اطلب الآن</button>
+
+<div class="card">
+<h3>🔥 فري فاير</h3>
+<button onclick="selectGame('فري فاير')">اختيار</button>
 </div>
+
+<div class="card">
+<h3>🎯 ببجي</h3>
+<button onclick="selectGame('ببجي')">اختيار</button>
+</div>
+
+<div class="card">
+<h3>🎲 لودو</h3>
+<button onclick="selectGame('لودو')">اختيار</button>
+</div>
+
+</div>
+
+<hr>
+
+<h2>إكمال الطلب</h2>
+
+<input id="name" placeholder="اسمك"><br>
+<input id="id" placeholder="ID اللاعب"><br>
+
+<select id="payment">
+<option>بنكك</option>
+<option>أوكاش</option>
+<option>ماي كاشي</option>
+<option>فوري</option>
+</select><br>
+
+<button onclick="sendOrder()">إرسال الطلب</button>
+
+<script>
+let game = "";
+
+function selectGame(g) {
+  game = g;
+  alert("تم اختيار " + g);
+}
+
+function sendOrder() {
+  let name = document.getElementById("name").value;
+  let id = document.getElementById("id").value;
+  let payment = document.getElementById("payment").value;
+
+  let message = `طلب جديد:
+اللعبة: ${game}
+الاسم: ${name}
+ID: ${id}
+الدفع: ${payment}`;
+
+  let phone = "249XXXXXXXXX"; // ضع رقمك هنا
+
+  let url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
+  window.open(url, "_blank");
+}
+</script>
 
 </body>
 </html>
